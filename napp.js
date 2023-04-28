@@ -38,11 +38,8 @@ fs.writeFile(fileName, fileContent, (err) => {
 이러면 파일이 생성됨 fs
  */
 
-
-
 import inquirer from "inquirer";
-import Choices from "inquirer/lib/objects/choices";
-
+/* 
 inquirer
   .prompt ([
     {
@@ -54,17 +51,17 @@ inquirer
       type : 'list',
       name : 'root',
       message : 'root 필요함?',
-      Choices : [`<div></div>`,`<div id = 'root'></div>`]
+      choices : 'yes''no',
+      //Choices : [`<div></div>`,`<div id = 'root'></div>`]
     },
     {
-
+      
     }
-  ])
+  ]) */
 
-import inquirer from 'inquirer';
 
-async function main() {
-  const answers = await inquirer.prompt([
+function main() {
+  const answers = inquirer.prompt([
     {
       type: 'input',
       name: 'title',
@@ -79,10 +76,15 @@ async function main() {
       type: 'confirm',
       name: 'root',
       message: '<div id="root"></div>를 추가하시겠습니까?',
+    },    
+    {
+      type: 'input',
+      name: 'p',
+      message: '내용 뭐 넣으실래요',
     },
   ]);
   
-  const { title, file, root } = answers;
+  const { title, file, root, p } = answers;
 
   const data = `<!DOCTYPE html>
   <html lang="en">
@@ -94,6 +96,7 @@ async function main() {
   </head>
   <body>
     ${root ? '<div id="root"></div>' : '<div></div>'}
+    <p>${p}</p>
   </body>
   </html>`;
 
@@ -107,3 +110,4 @@ async function main() {
 }
 
 main();
+
